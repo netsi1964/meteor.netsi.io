@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <header>
-      <h1>Todo List - "{{info}}"</h1>
+      <h1>Todo List</h1>
 
       <label class="hide-completed">
         <input checked="{{hideCompleted}}" type="checkbox"/>
@@ -16,7 +16,7 @@
         <input name="text" placeholder="Type to add new tasks" type="text"/>
       </form>
     </header>
-    {{> telize}}
+    <hr />{{> telize}}
     <ul>
       {{#each tasks}}
         {{> task}}
@@ -25,26 +25,6 @@
   </div>
 
 </body>
-<template name="telize">
-  <p>Query the location data for an IP</p>
-  <input id="ipv4" name="ipv4" type="text"/>
-  <button>Look up location</button>
-  <!-- set the data context -->
-  {{#with location}}
-    <!-- if location has an error property, display it -->
-    {{#if error}}
-      <p>There was an error:
-        {{error.errorType}}
-        {{error.message}}!</p>
-      {{else}}
-      <p>The IP address
-        {{location.ip}}
-        is in
-        {{location.city}}
-        ({{location.country}}).</p>
-    {{/if}}
-  {{/with}}
-</template>
 
 <template name="task">
 <li class="{{#if checked}}checked{{/if}}">
