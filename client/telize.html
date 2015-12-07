@@ -1,14 +1,45 @@
 <template name="telize">
-  <p>Query the location data for an IP</p>
-  <input id="ipv4" name="ipv4" type="text" />
-  <button>Look up location</button>
+  <div style="padding: 5px 13px;">
 
-  {{#with location}} {{#if error}}
-  <p>There was an error: {{error.errorType}} {{error.message}}!
-  </p>
-  {{else}}
-  <p>
-    The IP address {{location.ip}} is in {{location.city}} ({{location.country}}).
-  </p>
-  {{/if}} {{/with}}
+    <p>Query the location data for an IP</p>
+    <input id="ipv4" name="ipv4" type="text" value="91.224.211.71"/>
+    <button>Look up location</button>
+
+    {{#with location}}
+      {{#if error}}
+        <p>There was an error:
+          {{error.errorType}}
+          {{error.message}}!
+        </p>
+        {{else}}
+        <p>
+          The IP address
+          {{location.ip}}
+          ({{location.hostname}}) is in
+          {{location.city}}
+          ({{location.country}}).
+        </p>
+
+        <input type="hidden" id="coor" value="{{location.loc}}" onchange="showOnMap()" />
+
+        <script>
+          setInterval(function showOnMap() {
+            var lo = document.querySelector("#coor").value.split(",");
+            var latLng = new google.maps.LatLng(lo[0], lo[1]); //Makes a latlng
+            map.panTo(latLng); //Make map global
+            var marker = new google.maps.Marker({map: map, position: latLng});
+          }, 1000);
+        </script>
+
+        <style media="screen">
+          #map {
+            width: 100%;
+            height: 400px;
+          }
+        </style>
+        <div id="map"></div>
+
+      {{/if}}
+    {{/with}}
+  </div>
 </template>

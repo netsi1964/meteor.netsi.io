@@ -20,7 +20,7 @@ var apiCall = function (apiUrl, callback) {
 Meteor.methods({
   'geoJsonForIp': function (ip) {
     this.unblock();
-    var apiUrl = 'http://www.telize.com/geoip/' + ip;
+    var apiUrl = 'http://ipinfo.io/' + ip + '/json';
     var response = Meteor.wrapAsync(apiCall)(apiUrl);
     return response;
   }
