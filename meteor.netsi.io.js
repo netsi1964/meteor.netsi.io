@@ -1,13 +1,23 @@
-/*global Session, Mongo, Meteor, Template, $, jQuery, localStorage, window, angular, alert, document, console, confirm, require */
+/*global Npm, Session, Mongo, Meteor, Template, $, jQuery, localStorage, window, angular, alert, document, console, confirm, require */
 /*jshint unused:false */
 /*jshint plusplus: false, devel: true, nomen: true, indent: 4, maxerr: 50 */
 
 var Tasks = new Mongo.Collection("tasks");
+var conn;
+if (Meteor.isServer) {
+  Meteor.onConnection(function(connection) {
+    conn = connection;
+  });
+}
+
 
 if (Meteor.isClient) {
+
+
   // This code only runs on the client
   Template.body.helpers({
     tasks: function() {
+
       if (Session.get("hideCompleted")) {
         // If hide completed is checked, filter tasks
         return Tasks.find({
@@ -30,6 +40,9 @@ if (Meteor.isClient) {
     },
     hideCompleted: function() {
       return Session.get("hideCompleted");
+    },
+    info: function() {
+      return conn.clientAddress;
     }
   });
 

@@ -150,3 +150,8 @@ To https://git.heroku.com/meteor-netsi-io.git
 For now the app will be here: [
 http://meteor-netsi-io.herokuapp.com](
 http://meteor-netsi-io.herokuapp.com), however I will make a `CNAME` so that I can be reached on "[meteor.netsi.io](http://meteor.netsi.io)"
+
+
+## Playing around with Meteor
+
+1.  Added `meteor add mizzao:user-status` to get user IP
