@@ -155,3 +155,4 @@ http://meteor-netsi-io.herokuapp.com), however I will make a `CNAME` so that I c
 ## Playing around with Meteor
 
 1.  Added `meteor add mizzao:user-status` to get user IP
+2.  Added `meteor add http` to do API request (inspired by [https://dzone.com/articles/integrating-external-apis-your](https://dzone.com/articles/integrating-external-apis-your) )
