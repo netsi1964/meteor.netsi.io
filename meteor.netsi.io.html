@@ -1,11 +1,16 @@
 <head>
   <title>Todo List</title>
+
 </head>
 
 <body>
   <div class="container">
     <header>
       <h1>Todo List</h1>
+      <label class="hide-completed">
+        <input checked="{{hideCompleted}}" type="checkbox"/>
+        Hide Completed Tasks
+      </label>
       <form class="new-task">
         <input name="text" placeholder="Type to add new tasks" type="text"/>
       </form>
