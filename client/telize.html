@@ -20,14 +20,18 @@
           ({{location.country}}).
         </p>
 
-        <input type="hidden" id="coor" value="{{location.loc}}" onchange="showOnMap()" />
+        <input id="coor" onchange="showOnMap()" type="hidden" value="{{location.loc}}"/>
 
         <script>
           setInterval(function showOnMap() {
-            var lo = document.querySelector("#coor").value.split(",");
-            var latLng = new google.maps.LatLng(lo[0], lo[1]); //Makes a latlng
-            map.panTo(latLng); //Make map global
-            var marker = new google.maps.Marker({map: map, position: latLng});
+            if (typeof map === "undefined") {
+              initialize();
+            } else {
+              var lo = document.querySelector("#coor").value.split(",");
+              var latLng = new google.maps.LatLng(lo[0], lo[1]); //Makes a latlng
+              map.panTo(latLng); //Make map global
+              var marker = new google.maps.Marker({map: map, position: latLng});
+            }
           }, 1000);
         </script>
 
