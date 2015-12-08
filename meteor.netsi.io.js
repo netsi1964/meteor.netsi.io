@@ -1,4 +1,4 @@
-/*global Npm, Session, Mongo, Meteor, Template, $, jQuery, localStorage, window, angular, alert, document, console, confirm, require */
+/*global DDP, Session, Mongo, Meteor, Template, $, jQuery, localStorage, window, angular, alert, document, console, confirm, require */
 /*jshint unused:false */
 /*jshint plusplus: false, devel: true, nomen: true, indent: 4, maxerr: 50 */
 
@@ -57,9 +57,20 @@ if (Meteor.isClient) {
     }
   });
 
+  Meteor.methods({
+    'findUserInfo': function(context) {
+      var clientAddress = "TEST"; //DDP._CurrentInvocation.get().connection.clientAddress;
+      console.log("clientAddress" + clientAddress);
+      return clientAddress;
+    }
+  });
+
   Template.task.events({
     "click .toggle-checked": function() {
       // Set the checked property to the opposite of its current value
+      var findUserInfo = Meteor.call('findUseInfo', this, function(err, res) {
+        console.log(err, res)
+      });
       Tasks.update(this._id, {
         $set: {
           checked: !this.checked
